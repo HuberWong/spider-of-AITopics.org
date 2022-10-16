@@ -1,3 +1,4 @@
+from time import sleep
 from fake_useragent import UserAgent
 import requests
 from lxml import etree
@@ -24,7 +25,7 @@ class AITopicsSpider(object):
         # html = requests.get(url=self.url, headers=self.headers).text
         # html = open('./AITopicTest.html', 'r').read()
         html = requests.get(url=self.url.format(times), headers=self.headers).text
-
+        print(self.headers)
         parsedHTML = etree.HTML(html)
 
         titleList = parsedHTML.xpath('//div/h3[@class="searchtitle"]/a/text()')
@@ -41,6 +42,9 @@ class AITopicsSpider(object):
         for i in range(0, int(numberOfPiecesOfData / 10)):
             self.parseOnePageToSave(i)
             print('第' + str(i * 10) + '到' + str((i + 1) * 10) + '条资讯已经解析完毕')
+            for j in range(4, 0, -1):
+                print(str(j) + '秒结束后开始下次解析')
+                sleep(1)
 
 import csv
 

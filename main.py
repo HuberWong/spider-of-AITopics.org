@@ -9,7 +9,7 @@
 5. GOODLUCK
 
 '''
-numberOfNews = 30
+numberOfNews = 700
 
 from AITopicsSpider import *
 
