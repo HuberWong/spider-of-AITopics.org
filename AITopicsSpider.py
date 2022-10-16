@@ -40,7 +40,7 @@ class AITopicsSpider(object):
     def run(self, numberOfPiecesOfData:int):
         for i in range(0, int(numberOfPiecesOfData / 10)):
             self.parseOnePageToSave(i)
-            print('第' + str((i-1) * 10) + '到' + str(i * 10) + '条资讯已经解析完毕')
+            print('第' + str(i * 10) + '到' + str((i + 1) * 10) + '条资讯已经解析完毕')
 
 import csv
 
