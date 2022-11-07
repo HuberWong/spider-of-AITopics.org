@@ -1,4 +1,5 @@
 import csv
+import random
 from time import sleep
 from fake_useragent import UserAgent
 import requests
@@ -16,6 +17,10 @@ class NewAITopicsSpider:
         }
 
     def parseOnePageToSave(self, page_number):
+
+        self.headers = {
+            'User-Agent': str(UserAgent().random)
+        }
         # TODO 修改 url
         # html = requests.get(url=self.url, headers=self.headers).text
         # html = open('./AITopicTest.html', 'r').read()
@@ -45,6 +50,9 @@ class NewAITopicsSpider:
     def run(self, times:int):
         for i in range(0, times + 1):
             self.parseOnePageToSave(i)
+            waitTime = random.randint(5,10)
+            sleep(waitTime)
+            print(f'在 {waitTime}s 后开始下载下一页')
 
 
 class News:
