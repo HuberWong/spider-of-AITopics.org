@@ -2,16 +2,17 @@
 '''
 # 使用说明
 
-1. 修改需要收集资讯的数量 `numberOfNews`，最好是 10 的整倍数，因为每张页面上有10条资讯，时间为一周的话填 700 就差不多，吃饭的时间搞就好
+1. 修改需要收集资讯的页数 `page_number`，吃饭的时间搞就好
 2. 运行本程序 `python3 main.py`
 3. 将生成的 `AITopicsNews.csv` 文件用 Office Excel 或者 WPS 转成 `.xlsx` 格式
 4. 如果英文看的慢的话，可以使用谷歌翻译整个文档
 5. GOODLUCK
 
 '''
-numberOfNews = 700
+page_number = 100
+print(f'你将会获得 {page_number * 10} 条数据')
 
-from AITopicsSpider import *
+from newAITopicsSpider import *
 
-spider = AITopicsSpider()
-spider.run(numberOfNews)
+spider = NewAITopicsSpider()
+spider.run(page_number)

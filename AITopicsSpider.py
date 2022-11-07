@@ -3,7 +3,7 @@ from fake_useragent import UserAgent
 import requests
 from lxml import etree
 
-FILE = open('AITopicsNews.csv', 'w', newline='')
+FILE = open('AITopicsNews.csv', 'w', newline='', encoding='utf-8')
 
 class AITopicsSpider(object):
 
@@ -67,4 +67,4 @@ class News:
 if __name__ == '__main__':
     # 需要收集资讯的数量
     spider = AITopicsSpider()
-    spider.run(30)
+    spider.run(100)
