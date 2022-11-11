@@ -8,7 +8,7 @@
 5. GOODLY
 
 """
-page_number = 100
+page_number = 200
 print(f'你将会获得 {page_number * 10} 条数据')
 
 from newAITopicsSpider import NewAITopicsSpider
