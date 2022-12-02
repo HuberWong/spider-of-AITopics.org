@@ -10,6 +10,7 @@ from lxml import etree
 FILE = open('newAITopicsSpider.csv', 'a+', newline='', encoding='utf-8')
 LOG_FILE = open('log.txt', 'a+', newline='', encoding='utf-8')
 
+
 class NewAITopicsSpider:
     url = 'https://aitopics.org/search?start={}'
 
@@ -59,12 +60,25 @@ class NewAITopicsSpider:
                 print(f'{str(datetime.datetime.now())}---正在保存第{page_number}页-第{i}条\n')
                 n.save()
         except requests.exceptions.ProxyError as e:
-            waitTime = random.randint(1, 2)
-            LOG_FILE.write(f'{str(datetime.datetime.now())}---发生了错误' + str(e) + f'\n\n在 {waitTime}s 后将会重新尝试解析第 {page_number} 页\n')
-            print(f'{str(datetime.datetime.now())}---发生了错误' + str(e) + f'\n\n在 {waitTime}s 后将会重新尝试解析第 {page_number} 页\n')
-            self.parseOnePageToSave(page_number)
+            # waitTime = random.randint(1, 2)
+            # LOG_FILE.write(f'{str(datetime.datetime.now())}---发生了错误' + str(
+            #     e) + f'\n\n在 {waitTime}s 后将会重新尝试解析第 {page_number} 页\n')
+            # print(f'{str(datetime.datetime.now())}---发生了错误' + str(
+            #     e) + f'\n\n在 {waitTime}s 后将会重新尝试解析第 {page_number} 页\n')
+            # self.parseOnePageToSave(page_number)
+            self._error(e, page_number)
+        except ssl.SSLError as e:
+            self._error(e, page_number)
 
-    def run(self, times:int):
+    def _error(self, e, page_number):
+        waitTime = random.randint(1, 2)
+        LOG_FILE.write(f'{str(datetime.datetime.now())}---发生了错误' + str(
+            e) + f'\n\n在 {waitTime}s 后将会重新尝试解析第 {page_number} 页\n')
+        print(f'{str(datetime.datetime.now())}---发生了错误' + str(
+            e) + f'\n\n在 {waitTime}s 后将会重新尝试解析第 {page_number} 页\n')
+        self.parseOnePageToSave(page_number)
+
+    def run(self, times: int):
         for i in range(0, times + 1):
             self.parseOnePageToSave(i)
             waitTime = random.randint(5, 10)
